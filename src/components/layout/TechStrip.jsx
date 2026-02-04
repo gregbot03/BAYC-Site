@@ -1,21 +1,35 @@
+import { useState, useEffect } from 'react';
 import { Button } from '../common';
 import { EXTERNAL_URLS } from '../../services/constants';
 
 export default function TechStrip() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const styles = {
     container: {
       width: '100%',
       maxWidth: '1200px',
       display: 'flex',
+      flexDirection: isMobile ? 'column' : 'row',
       flexWrap: 'wrap',
       justifyContent: 'center',
-      alignItems: 'flex-end',
-      gap: '3rem',
+      alignItems: isMobile ? 'center' : 'flex-end',
+      gap: isMobile ? '1.5rem' : '3rem',
       paddingBottom: '2vh',
+      paddingLeft: isMobile ? '1rem' : '0',
+      paddingRight: isMobile ? '1rem' : '0',
       fontFamily: 'var(--f-sans)',
+      textAlign: isMobile ? 'center' : 'left',
     },
     metaCluster: {
-      display: 'flex',
+      display: isMobile ? 'none' : 'flex',
       alignItems: 'center',
       gap: '1.5rem',
     },
@@ -71,50 +85,35 @@ export default function TechStrip() {
       textTransform: 'uppercase',
     },
     copyrightBlock: {
-      textAlign: 'left',
+      textAlign: isMobile ? 'center' : 'left',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
     },
     copyYear: {
-      fontSize: '28px',
+      fontSize: isMobile ? '24px' : '28px',
       fontWeight: 800,
       letterSpacing: '-1px',
       lineHeight: 1,
     },
     copyBrand: {
-      fontSize: '14px',
+      fontSize: isMobile ? '12px' : '14px',
       fontWeight: 800,
       letterSpacing: '-0.5px',
       textTransform: 'uppercase',
     },
     disclaimerBlock: {
-      fontSize: '8px',
+      fontSize: isMobile ? '10px' : '8px',
       fontWeight: 600,
-      lineHeight: 1.3,
-      maxWidth: '220px',
+      lineHeight: 1.4,
+      maxWidth: isMobile ? '280px' : '220px',
       textTransform: 'uppercase',
-    },
-    stamp: {
-      width: '44px',
-      height: '32px',
-      border: '1px solid var(--ink)',
-      borderRadius: '50%',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      fontSize: '5px',
-      textAlign: 'center',
-      lineHeight: 1,
-      textTransform: 'uppercase',
-      fontWeight: 700,
-      transform: 'rotate(-10deg)',
     },
   };
 
   return (
     <div style={styles.container}>
+      {/* Hide complex meta cluster on mobile */}
       <div style={styles.metaCluster}>
         <svg
           width="24"
@@ -150,8 +149,12 @@ export default function TechStrip() {
 
       <div style={styles.disclaimerBlock}>
         THE BORED APE YACHT CLUB IS A COLLECTION OF 10,000 UNIQUE BORED APE NFTS— DIGITAL COLLECTIBLES LIVING ON THE ETHEREUM BLOCKCHAIN.
-        <br /><br />
-        YOUR BORED APE DOUBLES AS YOUR YACHT CLUB MEMBERSHIP CARD, AND GRANTS ACCESS TO MEMBERS-ONLY BENEFITS.
+        {!isMobile && (
+          <>
+            <br /><br />
+            YOUR BORED APE DOUBLES AS YOUR YACHT CLUB MEMBERSHIP CARD, AND GRANTS ACCESS TO MEMBERS-ONLY BENEFITS.
+          </>
+        )}
       </div>
 
       <Button href={EXTERNAL_URLS.OPENSEA_BAYC} external>
