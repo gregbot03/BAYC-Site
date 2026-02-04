@@ -16,10 +16,10 @@ const isSanityConfigured = () => {
 // Transform Sanity activation to match existing data structure
 function transformActivation(sanityActivation) {
   return {
-    id: sanityActivation._id,
+    id: sanityActivation.slug?.current || sanityActivation._id,
     title: sanityActivation.title,
     category: sanityActivation.category,
-    year: sanityActivation.date ? new Date(sanityActivation.date).getFullYear().toString() : '2024',
+    year: sanityActivation.year || 2024,
     thumbnail: sanityActivation.thumbnail
       ? urlFor(sanityActivation.thumbnail).width(600).height(600).url()
       : '/placeholder.jpg',
@@ -28,6 +28,7 @@ function transformActivation(sanityActivation) {
       : [],
     description: sanityActivation.description || '',
     links: sanityActivation.links || [],
+    featured: sanityActivation.featured || false,
   };
 }
 

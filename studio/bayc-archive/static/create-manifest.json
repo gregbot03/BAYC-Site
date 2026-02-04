@@ -1,0 +1,21 @@
+{
+  "version": 3,
+  "createdAt": "2026-02-04T23:19:45.909Z",
+  "workspaces": [
+    {
+      "name": "default",
+      "title": "BAYC Archive Page",
+      "basePath": "/",
+      "projectId": "cg92vzda",
+      "dataset": "production",
+      "icon": null,
+      "mediaLibrary": {
+        "enabled": false,
+        "__internal": {}
+      },
+      "schema": "6caab82e.create-schema.json",
+      "tools": "d8640c31.create-tools.json"
+    }
+  ],
+  "studioVersion": "5.8.0"
+}

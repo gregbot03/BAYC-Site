@@ -19,16 +19,17 @@ export function urlFor(source) {
 
 // Fetch all activations from Sanity
 export async function fetchActivations() {
-  const query = `*[_type == "activation"] | order(date desc) {
+  const query = `*[_type == "activation"] | order(year desc) {
     _id,
     title,
     slug,
     category,
-    date,
+    year,
     description,
     thumbnail,
     images,
-    links
+    links,
+    featured
   }`;
 
   return sanityClient.fetch(query);
@@ -40,16 +41,17 @@ export async function fetchActivationsByCategory(category) {
     return fetchActivations();
   }
 
-  const query = `*[_type == "activation" && category == $category] | order(date desc) {
+  const query = `*[_type == "activation" && category == $category] | order(year desc) {
     _id,
     title,
     slug,
     category,
-    date,
+    year,
     description,
     thumbnail,
     images,
-    links
+    links,
+    featured
   }`;
 
   return sanityClient.fetch(query, { category });
@@ -62,11 +64,12 @@ export async function fetchActivationBySlug(slug) {
     title,
     slug,
     category,
-    date,
+    year,
     description,
     thumbnail,
     images,
-    links
+    links,
+    featured
   }`;
 
   return sanityClient.fetch(query, { slug });

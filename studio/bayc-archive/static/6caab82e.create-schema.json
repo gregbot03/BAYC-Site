@@ -1,0 +1,212 @@
+[
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Collaborations",
+              "value": "collabs"
+            },
+            {
+              "title": "Drops",
+              "value": "drops"
+            },
+            {
+              "title": "Events",
+              "value": "events"
+            },
+            {
+              "title": "Physical",
+              "value": "physical"
+            },
+            {
+              "title": "Content",
+              "value": "content"
+            }
+          ],
+          "layout": "radio"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "collabs",
+                  "drops",
+                  "events",
+                  "physical",
+                  "content"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "category",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 2021
+              },
+              {
+                "flag": "max",
+                "constraint": 2030
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "year",
+        "type": "number"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "thumbnail",
+        "type": "image"
+      },
+      {
+        "of": [
+          {
+            "options": {
+              "hotspot": true
+            },
+            "type": "image"
+          }
+        ],
+        "name": "images",
+        "type": "array",
+        "title": "Gallery Images"
+      },
+      {
+        "rows": 4,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "title",
+                "type": "string"
+              },
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "uri",
+                        "constraint": {
+                          "options": {
+                            "scheme": [
+                              "/^http$/",
+                              "/^https$/"
+                            ],
+                            "allowRelative": false,
+                            "relativeOnly": false,
+                            "allowCredentials": false
+                          }
+                        }
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "url",
+                "type": "url",
+                "title": "URL"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "links",
+        "type": "array"
+      },
+      {
+        "initialValue": false,
+        "description": "Show this activation prominently",
+        "name": "featured",
+        "type": "boolean"
+      }
+    ],
+    "name": "activation",
+    "type": "document"
+  }
+]

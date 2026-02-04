@@ -8,7 +8,8 @@
     "build": "vite build",
     "start": "serve dist -s -l $PORT",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "studio": "npm run dev --prefix studio"
   },
   "dependencies": {
     "@sanity/client": "^7.14.1",
