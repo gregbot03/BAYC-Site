@@ -17,4 +17,7 @@ export const EXTERNAL_URLS = {
   STORE: 'https://store.boredapeyachtclub.com',
   OPENSEA_BAYC: 'https://opensea.io/collection/boredapeyachtclub',
   OPENSEA_MAYC: 'https://opensea.io/collection/mutant-ape-yacht-club',
+  TWITTER: 'https://x.com/BoredApeYC',
+  INSTAGRAM: 'https://instagram.com/boredapeyachtclub',
+  DISCORD: 'https://discord.gg/3P5K3dzgdB',
 };
